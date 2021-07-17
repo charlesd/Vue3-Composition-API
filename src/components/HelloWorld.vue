@@ -15,31 +15,40 @@
 	  </tbody>
 	</table>
 	<div style="text-align: left;">{{counter}} countries listed.</div>
+	<div style="text-align: left;">{{link}}</div>
   </div>
 </template>
 
 <script>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, computed, onMounted, toRefs } from 'vue'
 import axios from 'axios'
 
 export default {
   name: "HelloWorld",
   props: {
+    url: {
+      type: String,
+      required: true
+    }
   },
-  setup(){
+  setup(props){
+	const { url } = toRefs(props)
 	const countries = ref([])
 	const counter = ref(0)
+	const link = computed(() => '*** '+url.value+' ***')
+
 	watch(countries, (newValue, oldValue) => {
 	//	console.log('countries: ' + countries.value)
 		counter.value = newValue.length
 	})
 	onMounted(() => {
-		axios(`https://restcountries.eu/rest/v2/regionalbloc/nafta`)
+		axios(url.value)
 			.then(response => countries.value = response.data)
 	})
 	return {
 		countries,
-		counter
+		counter,
+		link
 	}
   },
 };

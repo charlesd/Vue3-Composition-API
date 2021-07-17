@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld />
+  <HelloWorld url="https://restcountries.eu/rest/v2/regionalbloc/nafta" />
 </template>
 
 <script>
