@@ -35,7 +35,7 @@ export default {
 	const { url } = toRefs(props)
 	const countries = ref([])
 	const counter = ref(0)
-	const link = computed(() => '*** '+url.value+' ***')
+	const link = computed(() => '*** Data source: '+url.value+' ***')
 
 	watch(countries, (newValue, oldValue) => {
 	//	console.log('countries: ' + countries.value)
